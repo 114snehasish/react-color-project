@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import ColorBox from './ColorBox';
-import Navbar from './Navbar';
-import './Palette.css';
-import PaletteFooter from './PaletteFooter';
+import React, { Component } from "react";
+import ColorBox from "./ColorBox";
+import Navbar from "./Navbar";
+import "./Palette.css";
+import PaletteFooter from "./PaletteFooter";
 
 export default class Palette extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { level: 500, format: 'hex' };
+    this.state = { level: 500, format: "hex" };
     this.changeLevel = this.changeLevel.bind(this);
     this.changeColorFormat = this.changeColorFormat.bind(this);
   }
@@ -30,18 +30,18 @@ export default class Palette extends Component {
         background={color[format]}
         name={color.name}
         moreUrl={`/palette/${id}/${color.id}`}
-        showLink={true}
+        showingFullColorPalette={true}
       />
     ));
     return (
-      <div className='Palette'>
+      <div className="Palette">
         <Navbar
           level={level}
           changeLevel={this.changeLevel}
           handleChange={this.changeColorFormat}
           showSlider={true}
         />
-        <div className='Palette-color'>{colorBoxes}</div>
+        <div className="Palette-color">{colorBoxes}</div>
         <PaletteFooter paletteName={paletteName} emoji={emoji} />
       </div>
     );

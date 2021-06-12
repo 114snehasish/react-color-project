@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import ColorBox from './ColorBox';
-import Navbar from './Navbar';
-import PaletteFooter from './PaletteFooter';
-import './Palette.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import ColorBox from "./ColorBox";
+import Navbar from "./Navbar";
+import PaletteFooter from "./PaletteFooter";
+import "./Palette.css";
 
 export default class SingleColorPalette extends Component {
   constructor(props) {
     super(props);
-    this.state = { format: 'hex' };
+    this.state = { format: "hex" };
     const { palette, colorId } = this.props;
     this._shades = this.gatherShades(palette, colorId);
     this.changeColorFormat = this.changeColorFormat.bind(this);
@@ -36,17 +36,17 @@ export default class SingleColorPalette extends Component {
         key={color.name}
         background={color[format]}
         name={color.name}
-        showLink={false}
+        showingFullColorPalette={false}
       />
     ));
     return (
-      <div className='SingleColorPalette Palette'>
+      <div className="SingleColorPalette Palette">
         <Navbar handleChange={this.changeColorFormat} showSlider={false} />
-        <div className='Palette-color'>
+        <div className="Palette-color">
           {colorBoxes}
-          <div className={'go-back ColorBox'}>
+          <div className={"go-back ColorBox"}>
             <Link to={`/palette/${palette.id}`}>
-              <button className='ColorBox-back-button'>GO BACK</button>
+              <button className="ColorBox-back-button">GO BACK</button>
             </Link>
           </div>
         </div>
