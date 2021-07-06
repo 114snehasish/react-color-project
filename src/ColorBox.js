@@ -114,7 +114,7 @@ const styles = {
     MsTransform: 'scale(0.1)',
     OTransform: 'scale(0.1)',
     opacity: '0',
-    '& h1':{
+    '& h1': {
       fontWeight: '200',
       width: '100%',
       backgroundColor: 'rgba(255, 255, 255, 0.3)',
@@ -124,7 +124,7 @@ const styles = {
       padding: '1rem',
       textTransform: 'uppercase',
     },
-    '& p':{
+    '& p': {
       fontSize: '1.5rem',
       fontWeight: '100',
     }
