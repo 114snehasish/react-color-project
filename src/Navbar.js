@@ -7,9 +7,10 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import { withStyles } from '@material-ui/styles';
+import { styles } from "./Styles/NavbarStyles";
 
-export default class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
 
@@ -27,17 +28,17 @@ export default class Navbar extends Component {
   }
 
   render() {
-    const { level, changeLevel, showSlider } = this.props;
+    const { level, changeLevel, showSlider, classes } = this.props;
     const { format } = this.state;
     return (
-      <header className="NavBar">
-        <div className="logo">
+      <header className={classes.navbar}>
+        <div className={classes.logo}>
           <Link to="/">Palletty</Link>
         </div>
         {showSlider && (
-          <div className="slider-container">
+          <div>
             <span>Level: {level}</span>
-            <div className="slider">
+            <div className={classes.slider}>
               <Slider
                 defaultValue={level}
                 min={100}
@@ -49,7 +50,7 @@ export default class Navbar extends Component {
           </div>
         )}
 
-        <div className="select-container">
+        <div className={classes.selectContainer}>
           <Select value={format} onChange={this.handleChange}>
             <MenuItem value="hex">HEX - #FFFFFF</MenuItem>
             <MenuItem value="rgb">RGB - RGB(255,255,255)</MenuItem>
@@ -84,3 +85,5 @@ export default class Navbar extends Component {
     );
   }
 }
+
+export default withStyles(styles)(Navbar);
