@@ -61,6 +61,89 @@ const styles = {
     border: "none",
     opacity: 0,
   },
+  boxContent: {
+    position: 'absolute',
+    padding: '0.5em',
+    width: '100%',
+    boxSizing: 'border-box',
+    bottom: '0',
+    left: '0',
+    letterSpacing: '0.2em',
+    fontSize: '80%',
+  },
+  copyOverlay: {
+    opacity: '0',
+    zIndex: '0',
+    width: '100%',
+    height: '100%',
+    transition: 'transform 0.6s ease-in-out',
+    WebkitTransition: 'transform 0.6s ease-in-out',
+    MozTransition: 'transform 0.6s ease-in-out',
+    MsTransition: 'transform 0.6s ease-in-out',
+    OTransition: 'transform 0.6s ease-in-out',
+    transform: 'scale(0.1)',
+    WebkitTransform: 'scale(0.1)',
+    MozTransform: 'scale(0.1)',
+    MsTransform: 'scale(0.1)',
+    OTransform: 'scale(0.1)',
+  },
+  showOverlay: {
+    opacity: '1',
+    transform: 'scale(10)',
+    WebkitTransform: 'scale(10)',
+    MozTransform: 'scale(10)',
+    MsTransform: 'scale(10)',
+    OTransform: 'scale(10)',
+    zIndex: '10',
+    position: 'absolute',
+  },
+  copyMsg: {
+    position: 'fixed',
+    left: '0',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    fontSize: '4rem',
+    transform: 'scale(0.1)',
+    WebkitTransform: 'scale(0.1)',
+    MozTransform: 'scale(0.1)',
+    MsTransform: 'scale(0.1)',
+    OTransform: 'scale(0.1)',
+    opacity: '0',
+    '& h1':{
+      fontWeight: '200',
+      width: '100%',
+      backgroundColor: 'rgba(255, 255, 255, 0.3)',
+      textAlign: 'center',
+      textShadow: '1px 2px black',
+      marginBottom: '0',
+      padding: '1rem',
+      textTransform: 'uppercase',
+    },
+    '& p':{
+      fontSize: '1.5rem',
+      fontWeight: '100',
+    }
+  },
+  showMsg: {
+    opacity: '1',
+    transform: 'scale(1)',
+    WebkitTransform: 'scale(1)',
+    MozTransform: 'scale(1)',
+    MsTransform: 'scale(1)',
+    OTransform: 'scale(1)',
+    zIndex: '10',
+    transition: 'all 0.4s ease-in-out',
+    WebkitTransition: 'all 0.4s ease-in-out',
+    MozTransition: 'all 0.4s ease-in-out',
+    MsTransition: 'all 0.4s ease-in-out',
+    OTransition: 'all 0.4s ease-in-out',
+    transitionDelay: '0.3s',
+  },
 };
 
 class ColorBox extends Component {
@@ -86,14 +169,14 @@ class ColorBox extends Component {
         <div style={{ background }} className={classes.colorBox}>
           <div
             style={{ background }}
-            className={`ColorBox-copy-overlay ${copied && "show"}`}
+            className={`${classes.copyOverlay} ${copied && classes.showOverlay}`}
           />
-          <div className={`ColorBox-copy-msg ${copied && "show"}`}>
+          <div className={`${classes.copyMsg} ${copied && classes.showMsg}`}>
             <h1>Copied!!</h1>
             <p className={classes.copyText}>{background}</p>
           </div>
           <div className="ColorBox-copy-container">
-            <div className="ColorBox-box-content">
+            <div className={classes.boxContent}>
               <span className={classes.colorName}>{name}</span>
             </div>
             <button className={classes.copyButton}>Copy</button>
