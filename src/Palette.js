@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
-import './Palette.css';
 import PaletteFooter from './PaletteFooter';
 import { withStyles } from '@material-ui/styles';
-
-const style = {
-  palette: {
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  paletteColor: {
-    height: '90%',
-  }
-};
-
+import { styles } from './Styles/PaletteStyles'
 class Palette extends Component {
   constructor(props) {
     super(props);
@@ -61,4 +49,4 @@ class Palette extends Component {
   }
 }
 
-export default withStyles(style)(Palette);
+export default withStyles(styles)(Palette);
