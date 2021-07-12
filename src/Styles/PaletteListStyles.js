@@ -18,6 +18,10 @@ export const styles = {
         width: '100%',
         justifyContent: 'space-between',
         color: 'white',
+        alignItems: 'center',
+        '& a': {
+            color: 'white',
+        }
     },
     palette: {
         boxSizing: 'border-box',
