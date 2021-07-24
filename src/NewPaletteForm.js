@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -76,7 +76,9 @@ const useStyles = makeStyles((theme) => ({
 export default function NewPaletteForm() {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
+    const [currentColor, setCurrentColor] = React.useState("teal");
+    const [colors, setColors] = React.useState(["purple", "#79184a"])
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -84,6 +86,10 @@ export default function NewPaletteForm() {
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+
+    const addNewColor = () => {
+        setColors([...colors, currentColor]);
     };
 
     return (
@@ -130,8 +136,8 @@ export default function NewPaletteForm() {
                     <Button variant="contained" color="secondary">Clear Palette</Button>
                     <Button variant="contained" color="primary">Random Color</Button>
                 </div>
-                <ChromePicker color="purple" onChangeComplete={(newColor) => console.log(`newColor`, newColor)} />
-                <Button variant="contained" color="primary">Add Color</Button>
+                <ChromePicker color={currentColor} onChangeComplete={(newColor) => setCurrentColor(newColor.hex)} />
+                <Button variant="contained" color="primary" style={{ backgroundColor: currentColor }} onClick={addNewColor}>Add Color</Button>
             </Drawer>
             <main
                 className={clsx(classes.content, {
@@ -139,6 +145,9 @@ export default function NewPaletteForm() {
                 })}
             >
                 <div className={classes.drawerHeader} />
+                <ul>
+                    {colors.map(c => <li style={{ backgroundColor: c }}>{c}</li>)}
+                </ul>
             </main>
         </div>
     );
