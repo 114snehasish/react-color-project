@@ -15,8 +15,8 @@ const styles = {
 
 function DraggableColorBox({ color, classes }) {
     return (
-        <div className={classes.root} style={{ backgroundColor: color }}>
-            {color}
+        <div className={classes.root} style={{ backgroundColor: color.color }}>
+            {color.name}
         </div>
     )
 }
