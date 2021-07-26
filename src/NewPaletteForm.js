@@ -82,6 +82,7 @@ export default function NewPaletteForm(props) {
     const [open, setOpen] = React.useState(true);
     const [currentColor, setCurrentColor] = React.useState("teal");
     const [currentName, setCurrentName] = React.useState("");
+    const [newPaletteName, setNewPaletteName] = React.useState('')
     const [colors, setColors] = React.useState([])
     useEffect(() => {
         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
@@ -90,7 +91,10 @@ export default function NewPaletteForm(props) {
         ValidatorForm.addValidationRule('isColorUnique', (value) => {
             return colors.every(({ color }) => (color !== currentColor))
         })
-    }, [colors, currentColor])
+        ValidatorForm.addValidationRule('isPaletteNameUnique', (value) => {
+            return props.palettes.every(({ paletteName }) => value.toLowerCase() !== paletteName.toLowerCase())
+        })
+    }, [colors, currentColor, newPaletteName, props.palettes])
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -114,8 +118,13 @@ export default function NewPaletteForm(props) {
         setCurrentName(event.target.value)
     }
 
+    const handlePaletteNameChange = (event) => {
+        event.preventDefault();
+        setNewPaletteName(event.target.value)
+    }
+
     const savePalette = () => {
-        let newName = "New Test Palette"
+        let newName = newPaletteName;
         const newPalette = {
             paletteName: newName,
             id: newName.toLocaleLowerCase().replace(/ /g, '-'),
@@ -148,7 +157,15 @@ export default function NewPaletteForm(props) {
                     <Typography variant="h6" noWrap>
                         Persistent drawer
                     </Typography>
-                    <Button variant="contained" color="primary" onClick={savePalette}>Save Palette</Button>
+                    <ValidatorForm onSubmit={savePalette}>
+                        <TextValidator
+                            label="Palette Name"
+                            onChange={handlePaletteNameChange}
+                            value={newPaletteName}
+                            validators={['required', 'isPaletteNameUnique']}
+                            errorMessages={['Palette Name is required', 'Palette names already used']} />
+                        <Button variant="contained" color="primary" type="submit">Save Palette</Button>
+                    </ValidatorForm>
                 </Toolbar>
             </AppBar>
             <Drawer
