@@ -40,38 +40,35 @@ export default function PaletteMetaForm({ palettes, savePalette }) {
   };
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
-      <Dialog open={open} onClose={handleCancel}>
-        <DialogTitle>Subscribe</DialogTitle>
+    <Dialog open={open} onClose={handleCancel}>
+      <DialogTitle>Choose a Palette Name</DialogTitle>
+      <ValidatorForm onSubmit={() => savePalette(newPaletteName)}>
         <DialogContent>
           <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
+            Please give a name to your palette. Make sure that you don't provide
+            any duplicate name.
           </DialogContentText>
-          <ValidatorForm onSubmit={() => savePalette(newPaletteName)}>
-            <TextValidator
-              label="Palette Name"
-              onChange={handleChange}
-              value={newPaletteName}
-              validators={["required", "isPaletteNameUnique"]}
-              errorMessages={[
-                "Palette Name is required",
-                "Palette names already used",
-              ]}
-            />
-            <Button variant="contained" color="primary" type="submit">
-              Save Palette
-            </Button>
-          </ValidatorForm>
+          <TextValidator
+            autoFocus
+            fullWidth
+            margin="normal"
+            label="Palette Name"
+            onChange={handleChange}
+            value={newPaletteName}
+            validators={["required", "isPaletteNameUnique"]}
+            errorMessages={[
+              "Palette Name is required",
+              "Palette names already used",
+            ]}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleOK}>Subscribe</Button>
+          <Button variant="contained" color="primary" type="submit">
+            Save Palette
+          </Button>
         </DialogActions>
-      </Dialog>
-    </div>
+      </ValidatorForm>
+    </Dialog>
   );
 }

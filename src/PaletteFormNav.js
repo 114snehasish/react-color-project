@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -39,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  navBtns: {},
+  navBtns: { marginRight: "1rem" },
+  button: { margin: "0 0.5rem", textDecoration: "none" },
 }));
 
 const PaletteFormNav = ({
@@ -50,6 +52,7 @@ const PaletteFormNav = ({
   savePalette,
 }) => {
   const [newPaletteName, setNewPaletteName] = React.useState("");
+  const [formShowing, setFormShowing] = React.useState(false);
   classes = { ...classes, ...useStyles() };
 
   const handlePaletteNameChange = (event) => {
@@ -82,14 +85,23 @@ const PaletteFormNav = ({
           </Typography>
         </Toolbar>
         <div className={classes.navBtns}>
-          <Link to="/">
+          <Link to="/" className={classes.button}>
             <Button variant="contained" color="secondary">
               Go Back
             </Button>
           </Link>
-          <PaletteMetaForm palettes={palettes} savePalette={savePalette} />
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={() => setFormShowing(!formShowing)}
+          >
+            Save
+          </Button>
         </div>
       </AppBar>
+      formShowing &&{" "}
+      <PaletteMetaForm palettes={palettes} savePalette={savePalette} />
     </div>
   );
 };
