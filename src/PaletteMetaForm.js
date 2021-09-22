@@ -16,7 +16,6 @@ export default function PaletteMetaForm({
   savePalette,
   handleHideDialog,
 }) {
-  const open = true;
   const [newPaletteName, setNewPaletteName] = useState("");
   const [stage, setStage] = useState("name");
 
