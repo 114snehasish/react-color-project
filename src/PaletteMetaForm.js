@@ -5,13 +5,18 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  TextField,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import { Picker } from "emoji-mart";
+import "emoji-mart/css/emoji-mart.css";
 
-export default function PaletteMetaForm({ palettes, savePalette }) {
-  const [open, setOpen] = useState(false);
+export default function PaletteMetaForm({
+  palettes,
+  savePalette,
+  handleHideDialog,
+}) {
+  const open = true;
   const [newPaletteName, setNewPaletteName] = useState("");
 
   useEffect(() => {
@@ -22,25 +27,13 @@ export default function PaletteMetaForm({ palettes, savePalette }) {
     });
   }, [palettes]);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
-  const handleOK = () => {
-    setOpen(false);
-  };
-
   const handleChange = (event) => {
     event.preventDefault();
     setNewPaletteName(event.target.value);
   };
 
   return (
-    <Dialog open={open} onClose={handleCancel}>
+    <Dialog open={open} onClose={handleHideDialog}>
       <DialogTitle>Choose a Palette Name</DialogTitle>
       <ValidatorForm onSubmit={() => savePalette(newPaletteName)}>
         <DialogContent>
@@ -62,8 +55,9 @@ export default function PaletteMetaForm({ palettes, savePalette }) {
             ]}
           />
         </DialogContent>
+        <Picker />
         <DialogActions>
-          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={handleHideDialog}>Cancel</Button>
           <Button variant="contained" color="primary" type="submit">
             Save Palette
           </Button>

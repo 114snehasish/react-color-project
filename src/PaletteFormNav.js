@@ -7,11 +7,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import React, { useEffect } from "react";
-import { withStyles } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import PaletteMetaForm from "./PaletteMetaForm";
+import { useState } from "react";
 
 const drawerWidth = 400;
 
@@ -51,13 +49,15 @@ const PaletteFormNav = ({
   handleDrawerOpen,
   savePalette,
 }) => {
-  const [newPaletteName, setNewPaletteName] = React.useState("");
-  const [formShowing, setFormShowing] = React.useState(false);
+  const [formShowing, setFormShowing] = useState(false);
   classes = { ...classes, ...useStyles() };
 
-  const handlePaletteNameChange = (event) => {
-    event.preventDefault();
-    setNewPaletteName(event.target.value);
+  const showDialog = () => {
+    setFormShowing(true);
+  };
+
+  const hideDialog = () => {
+    setFormShowing(false);
   };
 
   return (
@@ -94,14 +94,19 @@ const PaletteFormNav = ({
             className={classes.button}
             variant="contained"
             color="primary"
-            onClick={() => setFormShowing(!formShowing)}
+            onClick={showDialog}
           >
             Save
           </Button>
         </div>
       </AppBar>
-      formShowing &&{" "}
-      <PaletteMetaForm palettes={palettes} savePalette={savePalette} />
+      {formShowing && (
+        <PaletteMetaForm
+          palettes={palettes}
+          savePalette={savePalette}
+          handleHideDialog={hideDialog}
+        />
+      )}
     </div>
   );
 };
