@@ -6,7 +6,7 @@ export const styles = {
     position: "relative",
     cursor: "pointer",
     textTransform: "uppercase",
-    margin: "0 auto -4px",
+    margin: "0 auto -6px",
     "&:hover svg": {
       color: "white",
       transform: "scale(1.2)",
