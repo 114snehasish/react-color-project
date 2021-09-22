@@ -54,6 +54,17 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  buttons: { width: "100%", display: "flex", justifyContent: "space-between" },
+  button: { width: "48%" },
+  drawerContainer: {
+    width: "90%",
+    height: "100%",
+    display: "flex",
+    alignSelf: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));
 
 export default function NewPaletteForm(props) {
@@ -135,26 +146,36 @@ export default function NewPaletteForm(props) {
           </IconButton>
         </div>
         <Divider />
-        <Typography variant="h4">Design your palette</Typography>
-        <div>
-          <Button variant="contained" color="secondary" onClick={clearPalette}>
-            Clear Palette
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={addRandomColor}
-            disabled={paletteIsFull}
-          >
-            Random Color
-          </Button>
+        <div className={classes.drawerContainer}>
+          <Typography variant="h4" gutterBottom>
+            Design your palette
+          </Typography>
+          <div className={classes.buttons}>
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="secondary"
+              onClick={clearPalette}
+            >
+              Clear Palette
+            </Button>
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+              onClick={addRandomColor}
+              disabled={paletteIsFull}
+            >
+              Random Color
+            </Button>
+          </div>
+          <ColorPickerForm
+            paletteIsFull={paletteIsFull}
+            addNewColor={addNewColor}
+            palettes={props.palettes}
+            colors={colors}
+          />
         </div>
-        <ColorPickerForm
-          paletteIsFull={paletteIsFull}
-          addNewColor={addNewColor}
-          palettes={props.palettes}
-          colors={colors}
-        />
       </Drawer>
       <main
         className={clsx(classes.content, {
