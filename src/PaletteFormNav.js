@@ -11,6 +11,7 @@ import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import React, { useEffect } from "react";
 import { withStyles } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import PaletteMetaForm from "./PaletteMetaForm";
 
 const drawerWidth = 400;
 
@@ -50,13 +51,6 @@ const PaletteFormNav = ({
 }) => {
   const [newPaletteName, setNewPaletteName] = React.useState("");
   classes = { ...classes, ...useStyles() };
-  useEffect(() => {
-    ValidatorForm.addValidationRule("isPaletteNameUnique", (value) => {
-      return palettes.every(
-        ({ paletteName }) => value.toLowerCase() !== paletteName.toLowerCase()
-      );
-    });
-  }, [palettes]);
 
   const handlePaletteNameChange = (event) => {
     event.preventDefault();
@@ -93,21 +87,7 @@ const PaletteFormNav = ({
               Go Back
             </Button>
           </Link>
-          <ValidatorForm onSubmit={() => savePalette(newPaletteName)}>
-            <TextValidator
-              label="Palette Name"
-              onChange={handlePaletteNameChange}
-              value={newPaletteName}
-              validators={["required", "isPaletteNameUnique"]}
-              errorMessages={[
-                "Palette Name is required",
-                "Palette names already used",
-              ]}
-            />
-            <Button variant="contained" color="primary" type="submit">
-              Save Palette
-            </Button>
-          </ValidatorForm>
+          <PaletteMetaForm palettes={palettes} savePalette={savePalette} />
         </div>
       </AppBar>
     </div>
