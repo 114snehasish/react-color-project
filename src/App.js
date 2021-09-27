@@ -17,14 +17,22 @@ class App extends React.Component {
       console.error(e);
     }
     this.state = {
-      palettes: savedPalettes ? [...seedColors, ...savedPalettes] : seedColors,
+      palettes: savedPalettes || seedColors,
     };
     this.savePalette = this.savePalette.bind(this);
     this.findPalette = this.findPalette.bind(this);
+    this.deletePalette = this.deletePalette.bind(this);
   }
 
   findPalette(id) {
     return this.state.palettes.find((p) => p.id === id);
+  }
+
+  deletePalette(id) {
+    this.setState(
+      (st) => ({ palettes: st.palettes.filter((e) => e.id !== id) }),
+      this.syncLocalStorage
+    );
   }
 
   savePalette(newPalette) {
@@ -57,7 +65,11 @@ class App extends React.Component {
           exact
           path="/"
           render={(routeProps) => (
-            <PaletteList palettes={this.state.palettes} {...routeProps} />
+            <PaletteList
+              palettes={this.state.palettes}
+              {...routeProps}
+              deletePalette={this.deletePalette}
+            />
           )}
         />
         <Route
