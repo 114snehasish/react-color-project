@@ -24,7 +24,7 @@ export const styles = {
     },
     [sizes.down("md")]: {
       width: "50%",
-      height: (props) => (props.showingFullColorPalette ? "10%" : "10%"),
+      height: (props) => (props.showingFullColorPalette ? "10%" : "20%"),
     },
     [sizes.down("xs")]: {
       width: "100%",
@@ -104,6 +104,13 @@ export const styles = {
     OTransform: "scale(10)",
     zIndex: "10",
     position: "absolute",
+    [sizes.down("xs")]: {
+      transform: "scale(50)",
+      WebkitTransform: "scale(50)",
+      MozTransform: "scale(50)",
+      MsTransform: "scale(50)",
+      OTransform: "scale(50)",
+    },
   },
   copyMsg: {
     position: "fixed",
@@ -131,6 +138,9 @@ export const styles = {
       marginBottom: "0",
       padding: "1rem",
       textTransform: "uppercase",
+      [sizes.down("xs")]: {
+        fontSize: "5rem",
+      },
     },
     "& p": {
       fontSize: "1.5rem",
