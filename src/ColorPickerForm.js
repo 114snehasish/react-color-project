@@ -44,6 +44,7 @@ export default function ColorPickerForm({
           addNewColor(currentColor, currentName);
           setCurrentName('');
         }}
+        instantValidate={false}
       >
         <TextValidator
           className={classes.colorNameInput}
