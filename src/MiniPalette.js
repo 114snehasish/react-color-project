@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { withStyles } from '@material-ui/styles';
 import { styles } from './Styles/MiniPaletteStyles';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -16,6 +16,7 @@ function MiniPalette(props) {
     event.stopPropagation();
     openDialog(id);
   };
+  console.log(`rendering ${paletteName}`);
   return (
     <div className={classes.root} onClick={props.haandleClick}>
       <DeleteIcon className={classes.deleteIcon} onClick={deletePalette} />
@@ -28,4 +29,8 @@ function MiniPalette(props) {
   );
 }
 
-export default withStyles(styles)(MiniPalette);
+function arePropsEqual(prevProps, nextProps) {
+  return prevProps.paletteName === nextProps.paletteName;
+}
+
+export default withStyles(styles)(memo(MiniPalette, arePropsEqual));
