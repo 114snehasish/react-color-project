@@ -8,8 +8,9 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import DraggableColorList from './DraggableColorList';
 import { arrayMove } from 'react-sortable-hoc';
+
+import DraggableColorList from './DraggableColorList';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 import { useStyles } from './Styles/NewPaletteFormStyles';

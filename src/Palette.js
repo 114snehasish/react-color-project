@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/styles';
+
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import PaletteFooter from './PaletteFooter';
-import { withStyles } from '@material-ui/styles';
-import { styles } from './Styles/PaletteStyles'
+import { styles } from './Styles/PaletteStyles';
 class Palette extends Component {
   constructor(props) {
     super(props);

@@ -1,8 +1,9 @@
-import { ChromePicker } from "react-color";
-import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import Button from "@material-ui/core/Button";
-import React, { useEffect, useState } from "react";
-import { useStyles } from "./Styles/ColorPickerFormStyle";
+import { ChromePicker } from 'react-color';
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
+import Button from '@material-ui/core/Button';
+import React, { useEffect, useState } from 'react';
+
+import { useStyles } from './Styles/ColorPickerFormStyle';
 
 export default function ColorPickerForm({
   paletteIsFull,
@@ -10,15 +11,15 @@ export default function ColorPickerForm({
   palettes,
   colors,
 }) {
-  const [currentColor, setCurrentColor] = useState("teal");
-  const [currentName, setCurrentName] = useState("");
+  const [currentColor, setCurrentColor] = useState('teal');
+  const [currentName, setCurrentName] = useState('');
   useEffect(() => {
-    ValidatorForm.addValidationRule("isColorNameUnique", (value) => {
+    ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
       return colors.every(
         ({ name }) => name.toLowerCase() !== value.toLowerCase()
       );
     });
-    ValidatorForm.addValidationRule("isColorUnique", () => {
+    ValidatorForm.addValidationRule('isColorUnique', () => {
       return colors.every(({ color }) => color !== currentColor);
     });
   }, [colors, currentColor, palettes]);
@@ -41,33 +42,33 @@ export default function ColorPickerForm({
         className={classes.form}
         onSubmit={() => {
           addNewColor(currentColor, currentName);
-          setCurrentName("");
+          setCurrentName('');
         }}
       >
         <TextValidator
           className={classes.colorNameInput}
           value={currentName}
-          placeholder="Color Name"
+          placeholder='Color Name'
           onChange={handleChange}
-          variant="filled"
-          validators={["required", "isColorNameUnique", "isColorUnique"]}
+          variant='filled'
+          validators={['required', 'isColorNameUnique', 'isColorUnique']}
           errorMessages={[
-            "This is a required field",
-            "Color names must be unique",
-            "Colors in the palette must be unique",
+            'This is a required field',
+            'Color names must be unique',
+            'Colors in the palette must be unique',
           ]}
         />
         <Button
           className={classes.addColorButton}
-          type="submit"
-          variant="contained"
-          color="primary"
+          type='submit'
+          variant='contained'
+          color='primary'
           style={{
-            backgroundColor: paletteIsFull ? "lightgrey" : currentColor,
+            backgroundColor: paletteIsFull ? 'lightgrey' : currentColor,
           }}
           disabled={paletteIsFull}
         >
-          {paletteIsFull ? "Palette Full" : "Add Color"}
+          {paletteIsFull ? 'Palette Full' : 'Add Color'}
         </Button>
       </ValidatorForm>
     </>
