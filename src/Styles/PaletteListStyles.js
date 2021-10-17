@@ -1,4 +1,5 @@
 import sizes from './Sizes';
+import background from './background.svg';
 
 export const styles = {
   root: {
@@ -7,6 +8,9 @@ export const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center',
+    /* background by SVGBackgrounds.com */
+    backgroundImage: `url(${background})`,
+    overflow: 'scroll',
   },
   container: {
     width: '50%',
@@ -42,6 +46,12 @@ export const styles = {
     },
     [sizes.down('xs')]: {
       gridTemplateColumns: 'repeat(1, 100%)',
+    },
+  },
+  heading: {
+    fontSize: '2rem',
+    [sizes.down('xs')]: {
+      fontSize: '1.5rem',
     },
   },
 };
