@@ -1,18 +1,18 @@
-import React from "react";
-import clsx from "clsx";
-import { useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import DraggableColorList from "./DraggableColorList";
-import { arrayMove } from "react-sortable-hoc";
-import PaletteFormNav from "./PaletteFormNav";
-import ColorPickerForm from "./ColorPickerForm";
-import { useStyles } from "./Styles/NewPaletteFormStyles";
+import React from 'react';
+import clsx from 'clsx';
+import { useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import DraggableColorList from './DraggableColorList';
+import { arrayMove } from 'react-sortable-hoc';
+import PaletteFormNav from './PaletteFormNav';
+import ColorPickerForm from './ColorPickerForm';
+import { useStyles } from './Styles/NewPaletteFormStyles';
 
 export default function NewPaletteForm(props) {
   const maxColors = 20;
@@ -59,11 +59,11 @@ export default function NewPaletteForm(props) {
     const newPalette = {
       paletteName: newName,
       emoji: emoji,
-      id: newName.toLocaleLowerCase().replace(/ /g, "-"),
+      id: newName.toLocaleLowerCase().replace(/ /g, '-'),
       colors: colors,
     };
     props.savePalette(newPalette);
-    props.history.push("/");
+    props.history.push('/');
   };
 
   return (
@@ -77,8 +77,8 @@ export default function NewPaletteForm(props) {
       />
       <Drawer
         className={classes.drawer}
-        variant="persistent"
-        anchor="left"
+        variant='persistent'
+        anchor='left'
         open={open}
         classes={{
           paper: classes.drawerPaper,
@@ -86,7 +86,7 @@ export default function NewPaletteForm(props) {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
+            {theme.direction === 'ltr' ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
@@ -95,22 +95,22 @@ export default function NewPaletteForm(props) {
         </div>
         <Divider />
         <div className={classes.drawerContainer}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant='h4' gutterBottom>
             Design your palette
           </Typography>
           <div className={classes.buttons}>
             <Button
               className={classes.button}
-              variant="contained"
-              color="secondary"
+              variant='contained'
+              color='secondary'
               onClick={clearPalette}
             >
               Clear Palette
             </Button>
             <Button
               className={classes.button}
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               onClick={addRandomColor}
               disabled={paletteIsFull}
             >
@@ -134,8 +134,9 @@ export default function NewPaletteForm(props) {
         <DraggableColorList
           colors={colors}
           deleteColor={deleteColor}
-          axis="xy"
+          axis='xy'
           onSortEnd={onSortEnd}
+          distance={5}
         />
       </main>
     </div>
