@@ -2,6 +2,10 @@ import sizes from './Sizes';
 import background from './background.svg';
 
 export const styles = {
+  '@global': {
+    '.fade-exit': { opacity: 1 },
+    '.fade-exit-active': { opacity: 0, transition: 'opacity 500ms ease-out' },
+  },
   root: {
     backgroundColor: 'blue',
     height: '100vh',
@@ -10,7 +14,7 @@ export const styles = {
     justifyContent: 'center',
     /* background by SVGBackgrounds.com */
     backgroundImage: `url(${background})`,
-    overflow: 'scroll',
+    overflowY: 'scroll',
   },
   container: {
     width: '50%',
