@@ -48,8 +48,14 @@ export default function NewPaletteForm(props) {
 
   const addRandomColor = () => {
     const allColors = seedColors.map((p) => p.colors).flat();
-    const randomIdx = Math.floor(Math.random() * allColors.length);
-    setColors([...colors, allColors[randomIdx]]);
+    let randomIdx = Math.floor(Math.random() * allColors.length);
+    let isDuplicateColor = colors.includes(allColors[randomIdx]);
+    while (isDuplicateColor && allColors.length > colors.length) {
+      randomIdx = Math.floor(Math.random() * allColors.length);
+      isDuplicateColor = colors.includes(allColors[randomIdx]);
+    }
+    if (allColors.length > colors.length)
+      setColors([...colors, allColors[randomIdx]]);
   };
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
